@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var alignment: DStack.Alignment = .horizontal
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        DStack(hSpacing: 6, alignment: alignment) {
+            ForEach(Array(1...7), id: \.self) { _ in
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.blue)
+            }
         }
-        .padding()
+        .onTapGesture {
+            withAnimation {
+                alignment = alignment == .horizontal ? .diagonal : .horizontal
+            }
+        }
     }
 }
 
